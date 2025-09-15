@@ -1,8 +1,10 @@
+import * as bcrypt from 'bcrypt';
 import { Body, Injectable, Param } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm"
 import { User } from "src/entities/user.entity";
 import { Repository } from "typeorm";
 import { CreateUserDTO } from "./dto/create-user.dto";
+import { LoginDTO } from './dto/login-dto';
 
 @Injectable()
 export class UserService {
@@ -22,6 +24,15 @@ export class UserService {
     async create({ name, email, password, role }: CreateUserDTO): Promise<User> {
         const user = this.userRepository.create({ name, email, password, role });
         return this.userRepository.save(user);
+    }
+    
+    async validateUser({ email, password }: LoginDTO): Promise<User | null> {
+        const user = await this.userRepository.findOneBy({ email });
+        // if (user && await bcrypt.compare(password, user.password)) {
+        if (user && password) {
+            return user;
+        }
+        return null;
     }
 
     async remove(@Param('id') id: number): Promise<void> {

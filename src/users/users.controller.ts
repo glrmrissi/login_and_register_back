@@ -1,10 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, UnauthorizedException } from "@nestjs/common";
 import { UserService } from "./users.service";
 import { CreateUserDTO } from "./dto/create-user.dto";
 
 @Controller('users')
-export class UserController{
-    constructor( private readonly userService: UserService){}
+export class UserController {
+    constructor(private readonly userService: UserService) { }
     @Get()
     getUsers() {
         return this.userService.findAll()
@@ -19,6 +19,16 @@ export class UserController{
     async createUser(@Body() createUserDto: CreateUserDTO) {
         return await this.userService.create(createUserDto);
     }
+
+    @Post('login')
+    async login(@Body() { email, password }: { email: string, password: string }) {
+        const user = await this.userService.validateUser({ email, password });
+        if (!user) {
+            throw new UnauthorizedException('Invalid credentials');
+        }
+        return user;
+    }
+
 
     @Delete(':id')
     deleteUser(@Param('id') id: number) {
