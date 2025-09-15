@@ -34,8 +34,8 @@ export class UserService {
         return this.userRepository.save(user);
     }
     
-    async validateUser({ email, password }: LoginDTO) {
-        const user = await this.userRepository.findOneBy({ email });
+    async validateUser({ name, email, password }: LoginDTO) {
+        const user = await this.userRepository.findOneBy({ name, email });
         if (user && await bcrypt.compare(password, user.password)) { // TODO: Use bcrypt to hash and compare passwords and create a new database migration to update existing passwords
             // return user;
             // For security reasons, do not return the password
