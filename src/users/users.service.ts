@@ -8,6 +8,9 @@ import { LoginDTO } from './dto/login-dto';
 
 @Injectable()
 export class UserService {
+
+    // Todo: Add bcrypt to hash passwords and new migration to update existing passwords and create new methods.
+
     constructor(
         @InjectRepository(User)
         private userRepository: Repository<User>
@@ -28,7 +31,8 @@ export class UserService {
     
     async validateUser({ email, password }: LoginDTO): Promise<User | null> {
         const user = await this.userRepository.findOneBy({ email });
-        // if (user && await bcrypt.compare(password, user.password)) {
+        // if (user && await bcrypt.compare(password, user.password)) { // TODO: Use bcrypt to hash and compare passwords and create _ 
+        // new database migration to update existing passwords
         if (user && password) {
             return user;
         }
