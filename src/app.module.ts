@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './users/user.module';
+import { UserModule } from './users/users.module';
 import { User } from './entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
 
@@ -17,8 +17,9 @@ import { ConfigModule } from '@nestjs/config';
         password: String(process.env.DB_PASSWORD),
         database: process.env.DB_NAME,
         entities: [User],
-        synchronize: process.env.ENV_DEVELOPMENT === "development",
         autoLoadEntities: true,
+        // synchronize: process.env.ENV_DEVELOPMENT === "development",
+        // logging: true,
     }),
     UserModule
   ],

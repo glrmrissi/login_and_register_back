@@ -1,22 +1,25 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
+@Entity(process.env.DB_TABLE_NAME)
 export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
-    first_name: string;
-
-    @Column()
-    last_name: string;
+    name: string;
 
     @Column()
     email: string;
 
-    @Column({default: true})
-    is_actived: boolean;
+    @Column()
+    password: string;
 
-    @Column({default: true})
-    is_deleted: boolean;
+    @CreateDateColumn({ name: 'createdat' })
+    createdat: Date;
+
+    @UpdateDateColumn({ name: 'updatedat' })
+    updatedat: Date;
+
+    @Column()
+    role: number;
 }
