@@ -22,8 +22,8 @@ export class UserController {
         return await this.userService.create(createUserDto);
     }
 
-    @Post('register')
-    async register(@Body() { email, password }: { email: string, password: string }) {
+    @Post('login')
+    async login(@Body() { email, password }: { email: string, password: string }) {
         const user = await this.userService.validateUser({ email, password });
         if (!user) {
             throw new UnauthorizedException('Invalid credentials');
