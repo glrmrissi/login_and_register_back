@@ -2,7 +2,6 @@ import { IsString, IsEmail, IsStrongPassword, IsOptional, IsDateString, IsNumber
 import { Role } from "../../enums/role.enum";
 
 export class CreateUserDTO {
-
     @IsString()
     name: string;
 
@@ -18,10 +17,6 @@ export class CreateUserDTO {
     })
     password: string;
 
-    @IsOptional()
-    @IsDateString()
-    birthAt: string;
-    
     @IsEnum(Role)
-    role: number
+    role: number;
 }
