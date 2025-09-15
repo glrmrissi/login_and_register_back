@@ -1,3 +1,4 @@
+import { IsOptional } from "class-validator";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('users')
@@ -20,6 +21,7 @@ export class User {
     @UpdateDateColumn({ name: 'updatedat' })
     updatedat: Date;
 
-    @Column()
+    @Column({ type: 'int', default: 1 })
     role: number;
+
 }
