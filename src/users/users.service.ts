@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Param } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm"
 import { User } from "src/entities/user.entity";
 import { Repository } from "typeorm";
@@ -14,11 +14,11 @@ export class UserService{
         return this.userRepository.find()
     }
 
-    findOne(id: number): Promise<User | null>{
-        return this.userRepository.findOneBy({ id })
+    findOne(@Param('id') id: number): Promise<User | null>{
+        return this.userRepository.findOneBy({id})
     }
 
-    async remove(id:number): Promise<void> {
+    async remove(@Param('id') id: number): Promise<void> {
         await this.userRepository.delete(id)
     }
 }

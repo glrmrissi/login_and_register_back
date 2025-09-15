@@ -1,4 +1,4 @@
-import { Controller, Delete, Get } from "@nestjs/common";
+import { Controller, Delete, Get, Param } from "@nestjs/common";
 import { UserService } from "./users.service";
 
 @Controller('users')
@@ -10,12 +10,12 @@ export class UserController{
     }
 
     @Get(':id')
-    getUser(id: number) {
+    getUser(@Param('id') id: number) {
         return this.userService.findOne(id)
     }
 
     @Delete(':id')
-    deleteUser(id: number) {
+    deleteUser(@Param('id') id: number) {
         return this.userService.remove(id)
     }
 }

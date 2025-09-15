@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity(process.env.DB_TABLE_NAME)
+@Entity('users')
 export class User {
     @PrimaryGeneratedColumn()
     id: number;
