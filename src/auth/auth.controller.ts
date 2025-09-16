@@ -13,17 +13,8 @@ export class AuthController {
         return await this.authService.create(createUserDto);
     }
 
-    @Get('login')
-    async login(){
-        console.log("Login route");
+    @Post('login')
+    async login(@Body() { email, password }: { email: string, password: string }) {
+        return this.authService.createToken({email, password} as any);
     }
-
-    // @Post('login')
-    // async login(@Body() { email, password }: { email: string, password: string }) {
-    //     const user = await this.authService.validateUser({ email, password });
-    //     if (!user) {
-    //         throw new UnauthorizedException('Invalid credentials');
-    //     }
-    //     return user;
-    // }
 }
