@@ -8,25 +8,21 @@ import { LogInterceptor } from "src/interceptors/log.interceptor";
 export class UserController {
     constructor(private readonly userService: UserService) { }
 
-    // Get all users
     @Get()
     getUsers() {
         return this.userService.findAll()
     }
 
-    // Get user by id
     @Get(':id')
     getUser(@Param('id') id: number) {
         return this.userService.findOne(id)
     }
 
-    // Create a new user
     @Post()
     async createUser(@Body() createUserDto: CreateUserDTO) {
         return await this.userService.create(createUserDto);
     }
 
-    // Login user
     @Post('login')
     async login(@Body() { name, email, password }: { name: string, email: string, password: string }) {
         const user = await this.userService.validateUser({ name, email, password });
@@ -36,7 +32,6 @@ export class UserController {
         return user;
     }
 
-    // Delete user by id
     @Delete(':id')
     deleteUser(@Param('id') id: number) {
         return this.userService.remove(id)

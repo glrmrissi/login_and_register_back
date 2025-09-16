@@ -1,8 +1,9 @@
-import { IsOptional } from "class-validator";
+import { IsNotEmpty } from "class-validator";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('users')
 export class User {
+    @IsNotEmpty()
     @PrimaryGeneratedColumn()
     id: number;
 
