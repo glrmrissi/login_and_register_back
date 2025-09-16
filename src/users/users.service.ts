@@ -5,7 +5,6 @@ import { User } from "src/entities/user.entity";
 import { Repository } from "typeorm";
 import { CreateUserDTO } from "./dto/create-user.dto";
 import { LoginDTO } from './dto/login-dto';
-import { Role } from 'src/enums/role.enum';
 
 @Injectable()
 export class UserService {
@@ -39,7 +38,7 @@ export class UserService {
         if (user && await bcrypt.compare(password, user.password)) {
             // return user;
             const { password, ...result } = user;
-            console.log("Useaeaear: ", result);
+            console.log("user: ", result);
             return result;
         }
         if (user && password) {

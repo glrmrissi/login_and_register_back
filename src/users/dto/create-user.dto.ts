@@ -18,5 +18,5 @@ export class CreateUserDTO {
     password: string;
 
     @IsEnum(Role)
-    role: number;
+    role: Role;
 }
