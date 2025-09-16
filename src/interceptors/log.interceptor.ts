@@ -10,7 +10,7 @@ export class LogInterceptor implements NestInterceptor {
 
         return next.handle().pipe(tap(() => {
             console.log(
-                `\x1b[36mMETHOD:\x1b[0m \x1b[35m[${request.method}]\x1b[0m - \x1b[32mURL:\x1b[0m ${request.url} - Execução levou: \x1b[33m${Date.now() - dt}ms\x1b[0m.`
+                `\x1b[36m[Application]\x1b[0m - \x1b[35m[${request.method}]\x1b[0m - \x1b[32mURL:\x1b[0m ${request.url}    Execução levou: \x1b[33m${Date.now() - dt}ms\x1b[0m.`
             );
         }))
     }
