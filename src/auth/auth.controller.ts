@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post, UseInterceptors } from "@nestjs/common";
 import { LogInterceptor } from "src/interceptors/log.interceptor";
 import { AuthService } from "./auth.service";
 import { CreateUserDTO } from "src/users/dto/create-user.dto";
+import { LoginDTO } from "src/users/dto/login-dto";
 
 @UseInterceptors(LogInterceptor)
 @Controller('auth')
@@ -14,7 +15,7 @@ export class AuthController {
     }
 
     @Post('login')
-    async login(@Body() { email, password }: { email: string, password: string }) {
-        return this.authService.createToken({email, password} as any);
+    async login(@Body() { email, password }: LoginDTO) {
+        return this.authService.validateUser({ email, password });
     }
 }
