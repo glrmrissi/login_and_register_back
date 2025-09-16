@@ -5,6 +5,7 @@ import { User } from "src/entities/user.entity";
 import { Repository } from "typeorm";
 import { CreateUserDTO } from "./dto/create-user.dto";
 import { LoginDTO } from './dto/login-dto';
+import jwt from "jsonwebtoken";
 
 @Injectable()
 export class UserService {
@@ -33,8 +34,8 @@ export class UserService {
         return this.userRepository.save(user);
     }
     
-    async validateUser({ name, email, password }: LoginDTO) {
-        const user = await this.userRepository.findOneBy({ name, email });
+    async validateUser({ email, password }: LoginDTO) {
+        const user = await this.userRepository.findOneBy({ email });
         if (user && await bcrypt.compare(password, user.password)) {
             // return user;
             const { password, ...result } = user;
