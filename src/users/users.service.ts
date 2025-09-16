@@ -17,14 +17,17 @@ export class UserService {
         private userRepository: Repository<User>
     ) { }
 
+    // Get all users
     async findAll(): Promise<User[]> {
         return this.userRepository.find()
     }
 
+    // Get user by id
     async findOne(@Param('id') id: number): Promise<User | null> {
         return this.userRepository.findOneBy({ id })
     }
 
+    // Create a new user
     async create({ name, email, password, role }: CreateUserDTO): Promise<User> {
         const salt = await bcrypt.genSalt()
         
@@ -34,6 +37,7 @@ export class UserService {
         return this.userRepository.save(user);
     }
     
+    // Validate user by name, email, and password
     async validateUser({ name, email, password }: LoginDTO) {
         const user = await this.userRepository.findOneBy({ name, email });
         if (user && await bcrypt.compare(password, user.password)) { // TODO: Use bcrypt to hash and compare passwords and create a new database migration to update existing passwords
@@ -48,6 +52,7 @@ export class UserService {
         return null;
     }
 
+    // Delete user by id
     async remove(@Param('id') id: number): Promise<void> {
         await this.userRepository.delete(id)
     }
