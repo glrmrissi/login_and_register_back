@@ -18,20 +18,6 @@ export class UserController {
         return this.userService.findOne(id)
     }
 
-    @Post('register')
-    async createUser(@Body() createUserDto: CreateUserDTO) {
-        return await this.userService.create(createUserDto);
-    }
-
-    @Post('login')
-    async login(@Body() { email, password }: { email: string, password: string }) {
-        const user = await this.userService.validateUser({ email, password });
-        if (!user) {
-            throw new UnauthorizedException('Invalid credentials');
-        }
-        return user;
-    }
-
     @Delete(':id')
     deleteUser(@Param('id') id: number) {
         return this.userService.remove(id)

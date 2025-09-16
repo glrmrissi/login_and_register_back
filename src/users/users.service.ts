@@ -25,29 +25,6 @@ export class UserService {
         return this.userRepository.findOneBy({ id })
     }
 
-    async create({ name, email, password, role }: CreateUserDTO): Promise<User> {
-        const salt = await bcrypt.genSalt()
-        
-        password = await bcrypt.hash(password, salt)
-
-        const user = this.userRepository.create({ name, email, password, role });
-        return this.userRepository.save(user);
-    }
-    
-    async validateUser({ email, password }: LoginDTO) {
-        const user = await this.userRepository.findOneBy({ email });
-        if (user && await bcrypt.compare(password, user.password)) {
-            // return user;
-            const { password, ...result } = user;
-            console.log("user: ", result);
-            return result;
-        }
-        if (user && password) {
-            return user;
-        }
-        return null;
-    }
-
     async remove(@Param('id') id: number): Promise<void> {
         await this.userRepository.delete(id)
     }
