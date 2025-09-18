@@ -16,6 +16,8 @@ export class AuthService {
         private jwtService: JwtService
     ) { }
 
+    private readonly issuerAndAudience: string | undefined = process.env.ISSUER_AND_AUDIENCE;
+
     async createToken(user: User) {
         return {
             accessToken: this.jwtService.sign({
@@ -25,12 +27,11 @@ export class AuthService {
             }, {
                 expiresIn: "7 days",
                 subject: String(user.id),
-                issuer: "https://localhost:3000",
-                audience: "https://localhost:3000"
+                issuer: this.issuerAndAudience,
+                audience: this.issuerAndAudience
             })
         }
     }
-
 
     async create({ name, email, password, role }: CreateUserDTO): Promise<User> {
         const salt = await bcrypt.genSalt()
@@ -50,7 +51,6 @@ export class AuthService {
                 accessToken: token.accessToken,
             };
         }
-
         throw new UnauthorizedException('Email ou senha inválidos');
     }
 
