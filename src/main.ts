@@ -1,10 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import * as dotenv from 'dotenv';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  dotenv.config();
+  console.log(`Running in ${process.env.NODE_ENV} mode`);
   const app = await NestFactory.create(AppModule);
   app.enableCors({
       origin: ['http://localhost:4200'],
