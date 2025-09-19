@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { LoginDTO } from "src/users/dto/login-dto";
 import { InjectRepository } from "@nestjs/typeorm"
 import { User } from "src/entities/user.entity";
@@ -52,6 +52,27 @@ export class AuthService {
             };
         }
         throw new UnauthorizedException('Email ou senha inválidos');
+    }
+
+    checkToken(token: string) {
+        try {
+            const data = this.jwtService.verify(token, {
+                issuer: this.issuerAndAudience,
+                audience: this.issuerAndAudience
+            });
+            return data
+        } catch (e) {
+            throw new BadRequestException(e);
+        }
+    }
+
+    isValidToken(token: string) {
+        try {
+            this.checkToken(token);
+            return true;
+        } catch (e) {
+            return false;
+        }
     }
 
 }
