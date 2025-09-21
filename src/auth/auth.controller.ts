@@ -19,15 +19,12 @@ export class AuthController {
         return this.authService.validateUser({ email, password });
     }
 
-    @Get('validar')
-    validarToken(@Headers('authorization') authHeader: string) {
-        if (!authHeader) {
-            throw new BadRequestException('Token não enviado');
-        }
+    @Post('validate')
+    validateToken(@Body() payload: any) {
+        const token = payload.token;
 
-        const token = authHeader.split(' ')[1];
+        const valid = this.authService.isValidToken(token);
 
-        const valido = this.authService.isValidToken(token);
-        return { valido };
+        return { valid };
     }
 }
