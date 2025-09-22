@@ -5,9 +5,6 @@ import { Repository } from "typeorm";
 
 @Injectable()
 export class UserService {
-
-    // Todo: Add bcrypt to hash passwords and new migration to update existing passwords and create new methods.
-
     constructor(
         @InjectRepository(User)
         private userRepository: Repository<User>

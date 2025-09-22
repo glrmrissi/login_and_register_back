@@ -1,6 +1,9 @@
 import { CallHandler, ExecutionContext, NestInterceptor } from "@nestjs/common";
 import { Observable, tap } from "rxjs";
 
+
+// Interceptor para logar todas as requisições
+
 export class LogInterceptor implements NestInterceptor {
     intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
 
