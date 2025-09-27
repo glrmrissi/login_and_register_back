@@ -1,6 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, UnauthorizedException, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, UseInterceptors } from "@nestjs/common";
 import { UserService } from "./users.service";
-import { CreateUserDTO } from "./dto/create-user.dto";
 import { LogInterceptor } from "src/interceptors/log.interceptor";
 
 @UseInterceptors(LogInterceptor)
