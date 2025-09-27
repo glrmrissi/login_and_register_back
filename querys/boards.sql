@@ -3,5 +3,6 @@ CREATE TABLE boards (
 	name VARCHAR(100) NOT NULL,
 	description TEXT,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	create_by INT
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	created_by INT
 )
