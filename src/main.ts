@@ -13,5 +13,8 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
   await app.listen(process.env.PORT ?? 3000);
+  console.log(`
+🔊  Application is running on: \x1b[34mhttp://localhost:${process.env.PORT ?? 3000}\x1b[0m
+    `);
 }
 bootstrap();
