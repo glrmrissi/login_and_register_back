@@ -4,10 +4,10 @@ import { KanbanBoardController } from "./kanban-board.controller";
 import { AuthModule } from "src/auth/auth.module";
 import { KanbanBoard } from "src/entities/kanban-boards.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { KanbanColumns } from "src/entities/kanban-columns.entity";
+import { KanbanColumnsModule } from "./kanban-columns/kanban.columns.module";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([KanbanBoard]),TypeOrmModule.forFeature([KanbanColumns]), AuthModule],
+    imports: [TypeOrmModule.forFeature([KanbanBoard]), AuthModule, KanbanColumnsModule],
     controllers: [KanbanBoardController],
     providers: [KanbanBoardService],
 })
