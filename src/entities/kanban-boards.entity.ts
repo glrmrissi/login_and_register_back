@@ -1,5 +1,6 @@
 import { IsNotEmpty, IsOptional, IsString } from "class-validator";
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { KanbanColumns } from "./kanban-columns.entity";
 
 @Entity('boards')
 export class KanbanBoard {
@@ -21,4 +22,7 @@ export class KanbanBoard {
 
     @Column({ type: 'int', default: 0 })
     created_by: number;
+
+    @OneToMany(() => KanbanColumns, column => column.board)
+    columns: KanbanColumns[];
 }
