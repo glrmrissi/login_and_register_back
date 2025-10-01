@@ -1,3 +1,10 @@
+## Login and register back
+
+In theory, it was supposed to be a kanban, but the way I structured the front end wasn’t good. So it just turned into login and register.
+
+This project is linked to this repository https://github.com/glrmrissi/login_and_register_front
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
